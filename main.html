@@ -8,11 +8,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* --- Fonts --- */
+ 
         .font-vt323 { font-family: 'VT323', monospace; }
         .font-mono-tech { font-family: 'Roboto Mono', monospace; }
 
-        /* --- Colors --- */
+      
         :root {
             --color-blue-700: oklch(48.8% .243 264.376);
             --dark-bg: #0d0d0d;
@@ -20,10 +20,10 @@
             --dark-border: #22ff00;
         }
 
-        /* --- Utility Classes --- */
+
         .text-tech-blue { color: var(--color-blue-700); }
         .border-tech-blue { border-color: var(--color-blue-700); }
-        .bg-tech-blue-light { background-color: rgba(48, 75, 192, 0.1); } /* subtle light tint for background */
+        .bg-tech-blue-light { background-color: rgba(48, 75, 192, 0.1); } 
 
         .content-texture {
             background-image: linear-gradient(0deg, transparent 50%, rgba(0, 0, 0, 0.03) 50%),
@@ -33,7 +33,7 @@
 
         body { font-family: 'Roboto Mono', monospace; min-height: 100vh; }
 
-        /* Retro Buttons */
+
         .retro-button {
             transition: all 0.1s;
             box-shadow: 2px 2px 0px 0px var(--color-blue-700);
@@ -47,7 +47,7 @@
             transform: translate(2px, 2px);
         }
         
-        /* Dark Mode */
+
         body.dark-mode {
             background-color: var(--dark-bg);
             color: var(--dark-text);
@@ -64,7 +64,7 @@
              box-shadow: 0 0 5px rgba(34, 255, 0, 0.5);
         }
         
-        /* Uptime Bar Styles */
+
         .uptime-bar-container {
             background-color: #000;
             color: #00ff41; 
@@ -93,7 +93,7 @@
             border-right: none;
         }
 
-        /* Loading Bar Animation */
+
         .loading-bar {
             width: 98%;
             height: 4px;
@@ -118,7 +118,7 @@
             100% { transform: translateX(100%); }
         }
         
-        /* Loading Screen Fix */
+
         #initial-loader {
             position: fixed;
             top: 0;
@@ -137,7 +137,7 @@
             line-height: 1.2;
         }
         
-        /* SVG Animations */
+
         @keyframes pulse {
             0% { transform: scale(1); opacity: 0.1; }
             50% { transform: scale(1.1); opacity: 0.3; }
@@ -378,10 +378,10 @@
         </div>
     
     <script>
-        // Global variable for uptime seconds
+    
         let seconds = 0;
         
-        // --- 3.1. STATS FUNCTIONS (Uptime, CPU, RAM) ---
+
         function formatTime(totalSeconds) {
             const h = Math.floor(totalSeconds / 3600);
             const m = Math.floor((totalSeconds % 3600) / 60);
@@ -391,12 +391,12 @@
         }
 
         function simulateResourceUsage() {
-            // CPU Simulation (10.0% to 90.0%)
+          
             const cpuLoad = (Math.random() * 80 + 10).toFixed(1); 
             const cpuElement = document.getElementById('cpu-load');
             if (cpuElement) { cpuElement.textContent = `${cpuLoad}%`; }
 
-            // RAM Simulation (1.0 GB to 7.0 GB of 8.0 GB)
+         
             const totalRAM = 8.0; 
             const usedRAM = (Math.random() * 6 + 1).toFixed(1); 
             const ramElement = document.getElementById('ram-usage');
@@ -404,17 +404,17 @@
         }
 
         function updateSystemStats() {
-            // Update Uptime
+
             seconds++;
             const uptimeString = formatTime(seconds);
             const uptimeElement = document.getElementById('current-uptime');
             if (uptimeElement) { uptimeElement.textContent = uptimeString; }
 
-            // Update CPU and RAM
+
             simulateResourceUsage();
         }
 
-        // --- 3.2. LOADING SEQUENCE ---
+
         const loadingMessages = ["Initializing BIOS Sequence... [STATUS: OK]",
         "Loading Core Kernel (Manan) Modules...",
         "STATUS: User Profile Retrieval Initiated...",
@@ -453,24 +453,24 @@
 
                 messageIndex++;
                 
-                // Add a slight variable delay
+            
                 setTimeout(appendMessage, Math.random() * 400 + 100); 
                 } else {
-            // Once all messages are displayed, reveal the prompt
+  
             setTimeout(() => {
                 document.getElementById('continue-prompt').style.display = 'block';
-                // Also enable ENTER key to trigger the same action
+     
                 document.addEventListener('keydown', handleEnterKey);
             }, 500); 
         }
 
        
         }
-        // New function to handle the Enter key press
+      
 function handleEnterKey(event) {
     if (event.key === 'Enter') {
         showMainTerminal();
-        document.removeEventListener('keydown', handleEnterKey); // Remove listener after use
+        document.removeEventListener('keydown', handleEnterKey); 
     }
 }
 
@@ -479,19 +479,19 @@ function showMainTerminal() {
     const mainUI = document.getElementById('main-terminal-ui');
     const startupSound = document.getElementById('startup-sound');
     
-    // 1. Play the sound (Now guaranteed to work because it's tied to the user's click/key press)
+
     if (startupSound) {
         startupSound.play().catch(e => console.error("Error playing audio:", e));
     }
     
-    // 2. Hide loader and show main UI
+
     loaderElement.style.display = 'none';
     mainUI.style.display = 'block';
 
-    // 3. Populate the terminal output log (Your existing code)
+
     const terminalOutput = document.getElementById('terminal-output');
     if (terminalOutput) {
-        // --- THIS WAS LIKELY MISSING/INCORRECTLY WRAPPED ---
+
         terminalOutput.innerHTML = `
             <pre style="color: #00ff41; font-family: monospace; white-space: pre-wrap;">
                 [ ${new Date().toTimeString().split(' ')[0]} ] :: Welcome, **${userName}**. System ready for command input.
@@ -500,30 +500,30 @@ function showMainTerminal() {
     }
 
     
-    // 4. Start the stats timer
+
     setInterval(updateSystemStats, 1000); 
 }
 
 
   
 
-        // The function called when the <body> loads
+
         function startTerminalLoading() {
             const userName = localStorage.getItem('sessionUserName');
             
             if (!userName) {
-                // Redirect if no username is found, ensuring the sign-in flow is followed
+
                 window.location.href = 'index.html'; 
                 return;
             }
 
-            // Start the loading sequence
+     
             appendMessage();
         }
     </script>
 
     <script>
-        // Define commands first
+
         const commands = {
             help: {
                 output: "Available commands: about, github, linkedin, projects, email, darkmode on/off",
@@ -565,7 +565,7 @@ function showMainTerminal() {
             }
         }
         
-        // Add terminal commands for dark mode
+    
         commands['darkmode on'] = {
         output: isDarkModeOn() ? "Dark mode is ALREADY ON." : "Dark mode activated.",
         action: () => {
@@ -584,7 +584,7 @@ function showMainTerminal() {
     };
 
         
-        // Dark Mode Toggle Listener
+  
         darkModeToggleBtn.addEventListener('click', () => {
         setDarkMode(!isDarkModeOn());
     });
@@ -594,7 +594,7 @@ function showMainTerminal() {
     };
  
         
-        // Command Input Listener
+
         document.addEventListener('DOMContentLoaded', () => {
         const terminalInput = document.getElementById('terminal-input');
         const terminalOutput = document.getElementById('terminal-output');
@@ -605,13 +605,13 @@ function showMainTerminal() {
                     const input = terminalInput.value.trim().toLowerCase();
                     terminalInput.value = "";
 
-                    // Re-calculate output for dynamic commands (like darkmode)
+              
                     const commandEntry = commands[input];
                     let outputMessage = `Command not found. Type <span class="text-tech-blue">help</span>.`;
                     let commandAction = null;
 
                     if (commandEntry) {
-                        // Special handling for dynamic output (dark mode)
+
                         if (input === 'darkmode on') {
                             outputMessage = isDarkModeOn() ? "Dark mode is ALREADY ON." : "Dark mode activated.";
                         } else if (input === 'darkmode off') {
