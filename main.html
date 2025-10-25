@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manan Kapoor - Technical Specification</title>
+    <audio id="startup-sound" src="assets/sounds/windows-xp-startup.mp3" preload="auto"></audio>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Fonts --- */
+        .font-vt323 { font-family: 'VT323', monospace; }
+        .font-mono-tech { font-family: 'Roboto Mono', monospace; }
+
+        /* --- Colors --- */
+        :root {
+            --color-blue-700: oklch(48.8% .243 264.376);
+            --dark-bg: #0d0d0d;
+            --dark-text: #56fa0a;
+            --dark-border: #22ff00;
+        }
+
+        /* --- Utility Classes --- */
+        .text-tech-blue { color: var(--color-blue-700); }
+        .border-tech-blue { border-color: var(--color-blue-700); }
+        .bg-tech-blue-light { background-color: rgba(48, 75, 192, 0.1); } /* subtle light tint for background */
+
+        .content-texture {
+            background-image: linear-gradient(0deg, transparent 50%, rgba(0, 0, 0, 0.03) 50%),
+                              linear-gradient(90deg, transparent 50%, rgba(0, 0, 0, 0.03) 50%);
+            background-size: 2px 2px;
+        }
+
+        body { font-family: 'Roboto Mono', monospace; min-height: 100vh; }
+
+        /* Retro Buttons */
+        .retro-button {
+            transition: all 0.1s;
+            box-shadow: 2px 2px 0px 0px var(--color-blue-700);
+        }
+        .retro-button:hover {
+            box-shadow: 3px 3px 0px 0px var(--color-blue-700);
+            transform: translate(-1px, -1px);
+        }
+        .retro-button:active {
+            box-shadow: 0px 0px 0px 0px var(--color-blue-700);
+            transform: translate(2px, 2px);
+        }
+        
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+
+        body.dark-mode .retro-input {
+            background-color: transparent;
+            color: var(--dark-text);
+            border-color: var(--dark-border);
+        }
+        body.dark-mode .uptime-bar-container {
+             color: var(--dark-text);
+             border: 1px solid var(--dark-border);
+             box-shadow: 0 0 5px rgba(34, 255, 0, 0.5);
+        }
+        
+        /* Uptime Bar Styles */
+        .uptime-bar-container {
+            background-color: #000;
+            color: #00ff41; 
+            font-family: monospace; 
+            padding: 8px 0;
+            margin: 10px 0; 
+            border: 1px solid #00ff41;
+            box-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0 10px 5px 10px;
+            font-size: 14px;
+        }
+
+        .stat-item {
+            flex-grow: 1;
+            text-align: center;
+            border-right: 1px solid rgba(0, 255, 65, 0.3); 
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        /* Loading Bar Animation */
+        .loading-bar {
+            width: 98%;
+            height: 4px;
+            background-color: rgba(0, 255, 65, 0.2);
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 200%; 
+            background: linear-gradient(90deg, 
+                rgba(0, 255, 65, 0) 0%, 
+                #00ff41 50%, 
+                rgba(0, 255, 65, 0) 100%);
+            animation: move-load-bar 2s linear infinite;
+            transform: translateX(-100%);
+        }
+
+        @keyframes move-load-bar {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* Loading Screen Fix */
+        #initial-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(5, 33, 171);
+            overflow-y: auto;
+            z-index: 9999;
+            box-sizing: border-box;
+            padding: 20px;
+        }
+        #initial-loader p {
+            margin: 0;
+            white-space: pre-wrap;
+            line-height: 1.2;
+        }
+        
+        /* SVG Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.1; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+            100% { transform: scale(1); opacity: 0.1; }
+        }
+        @keyframes dataFlow {
+            0% { stroke-dashoffset: 100; }
+            100% { stroke-dashoffset: 0; }
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'tech-blue': 'var(--color-blue-700)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+
+<body class="bg-white text-gray-900 font-mono-tech min-h-screen p-4 sm:p-8" onload="startTerminalLoading()"> </style>
+    <body class="bg-white text-gray-900 font-mono-tech min-h-screen p-4 sm:p-8" onload="startTerminalLoading()">
+    
+    <div id="initial-loader" style="background-color: rgb(5, 33, 171);">
+        <p style="color: #00ff41;">System Boot Sequence Initiated...</p>
+        
+        <p id="continue-prompt" 
+           style="color: #00ff41; margin-top: 20px; cursor: pointer; display: none;" 
+           onclick="showMainTerminal()">
+           &gt; **[System Ready] Click or Press ENTER to start session** <span class="blinking-cursor">_</span>
+        </p>
+    </div>
+
+
+            </header>
+
+
+        <p style="color: #000000;">Welcome User</p>
+        
+        <p id="continue-prompt" 
+           style="color: #00ff41; margin-top: 20px; cursor: pointer; display: none;" 
+           onclick="showMainTerminal()">
+           &gt; **[System Ready] Click or Press ENTER to start session** <span class="blinking-cursor">_</span>
+        </p>
+    </div>
+    
+    <audio id="startup-sound" src="path/to/your/winxp_startup.mp3" preload="auto"></audio>
+    
+    <style>
+        .blinking-cursor {
+            animation: blink 1s steps(1, start) infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+    
+
+    <div id="main-terminal-ui" style="display: none;">
+        <button id="darkmode-toggle" 
+            class="fixed top-4 right-4 px-3 py-1 border-2 border-tech-blue rounded font-vt323 bg-gray-100 text-gray-900 z-50 hover:bg-gray-200 transition">
+            Dark Mode
+        </button>
+
+
+        
+        <button id="darkmode-toggle" 
+            class="fixed top-4 right-4 px-3 py-1 border-2 border-tech-blue rounded font-vt323 bg-gray-100 text-gray-900 z-50 hover:bg-gray-200 transition">
+            Dark Mode
+        </button>
+
+        <div class="max-w-7xl mx-auto"> 
+
+            <header class="mb-10 sm:mb-16 border-b-2 border-tech-blue pb-4 content-texture">
+                <h1 class="font-vt323 text-5xl sm:text-7xl lg:text-8xl text-tech-blue tracking-widest leading-none">
+                    MANAN KAPOOR 
+                </h1>
+                <p class="text-xs sm:text-sm text-right mt-2 text-gray-600">
+                    A technical specification document for a Computer Science Undergraduate (Thapar).
+                    <span class="block italic mt-1 font-light">— SYSTEM 23.MK: AI/ML ARCHITECTURE</span>
+                </p>
+                <hr style="border-top: 2px solid blue; margin-top: 10px;">
+            </header>
+            <div class="uptime-bar-container">
+                <div class="stats-row">
+                    <div class="stat-item uptime-stat">
+                        SESSION UPTIME: <strong id="current-uptime">00:00:00</strong>
+                    </div>
+                    <div class="stat-item cpu-stat">
+                        CPU: <strong id="cpu-load">00.0%</strong>
+                    </div>
+                    <div class="stat-item ram-stat">
+                        RAM: <strong id="ram-usage">0.0/8.0 GB</strong>
+                    </div>
+                </div>
+                <div class="loading-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+
+
+            
+            <div class="terminal-body">
+                <section class="mt-9 p-4 border-5 border-tech-blue rounded bg-gray-1000 max-w-xl mx-auto font-mono-tech">
+                    <div id="terminal-output" class="mb-2 text-gray-700 text-sm max-h-40 overflow-y-auto">
+                        </div>
+                    
+                    <input id="terminal-input" type="text" placeholder="type help..." 
+                           class="retro-input text-sm px-2 py-1 border-2 border-tech-blue rounded w-full focus:outline-none focus:ring-2 focus:ring-tech-blue">
+                </section>
+            </div>
+            
+            <main class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 mt-10">
+
+                <section class="lg:col-span-1 space-y-8 text-sm text-justify content-texture p-4 rounded-md">
+                    <p>
+                        <span class="text-4xl float-left mr-2 leading-none text-tech-blue font-bold">E</span>
+                        ntity **MANAN KAPOOR** is designated as a Computer Science Undergraduate at the Thapar Institute. Primary directives now focus on the intensive acquisition of knowledge in Machine Learning (ML) and Deep Learning architectures. Immediate operational goals include the study of Retrieval-Augmented Generation (RAG) systems and initial implementation of basic Neural Networks.
+                    </p>
+
+                    <p>
+                        Core system proficiencies are being expanded in C++ for mastering **Data Structures and Algorithms (DSA)**, alongside initial attempts at building small-scale neural network models. There is significant interest in exploring the potential of Generative AI (Gen AI) applications and translating theoretical models into tangible, operational software artifacts.
+                    </p>
+
+                    <div class="border-l-4 border-tech-blue pl-4 py-3 bg-tech-blue-light">
+                        <p class="text-sm italic text-gray-700"> 
+                            // STATUS REPORT [2025.10.25]: Project **Hestia** (Fire Prediction Dashboard) serves as a proof-of-concept for advanced risk visualization using a rule-based modeling kernel.
+                        </p>
+                    </div>
+
+                    <p>
+                        Further outputs include a **Minimal Photography Portfolio**, utilizing fundamental HTML + CSS for efficient data display. For system interface initiation or collaborative projects, contact can be established via Email (<span class="text-tech-blue">23.kapoormanan@gmail.com</span>) or designated platform repositories (GitHub, LinkedIn).
+                    </p>
+                </section>
+                
+                <aside class="lg:col-span-2 flex justify-center items-start pt-4">
+                    <div class="w-full max-w-2xl">
+                        <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" class="text-tech-blue">
+                            <style>
+                                .nn-node { stroke: currentColor; stroke-width: 2; fill: currentColor; opacity: 0.1; }
+                                .nn-node-pulse { animation: pulse 1.5s infinite ease-in-out; }
+                                .nn-line { stroke: currentColor; stroke-width: 1; opacity: 0.7; fill: none; }
+                                .nn-line-flow { stroke-dasharray: 10 10; stroke-dashoffset: 100; animation: dataFlow 2s linear infinite; }
+                                .nn-text { font-family: 'Roboto Mono', monospace; font-size: 14px; fill: currentColor; font-weight: 400; }
+                                .circuit-line { stroke: currentColor; stroke-width: 1; opacity: 0.4; stroke-dasharray: 2 2; }
+                            </style>
+
+                            <circle cx="100" cy="200" r="20" class="nn-node"/>
+                            <text x="100" y="205" text-anchor="middle" class="nn-text" font-size="12px">INPUT</text>
+                            <text x="100" y="225" text-anchor="middle" class="nn-text" font-size="10px" fill="gray">(Profile)</text>
+
+                            <g transform="translate(300, 200)">
+                                <rect x="-75" y="-75" width="150" height="150" class="nn-node" opacity="0.05" stroke-dasharray="4 4"/>
+                                <line x1="-60" y1="-60" x2="60" y2="60" class="circuit-line"/>
+                                <line x1="60" y1="-60" x2="-60" y2="60" class="circuit-line"/>
+                                <line x1="-70" y1="0" x2="70" y2="0" class="circuit-line"/>
+                                <line x1="0" y1="-70" x2="0" y2="70" class="circuit-line"/>
+                                <rect x="-30" y="-30" width="10" height="10" fill="currentColor" opacity="0.2"/>
+                                <rect x="20" y="-20" width="10" height="10" fill="currentColor" opacity="0.2"/>
+                                <rect x="-10" y="40" width="10" height="10" fill="currentColor" opacity="0.2"/>
+                                <text x="0" y="-85" text-anchor="middle" class="nn-text" font-size="12px">PROCESSING</text>
+                            </g>
+
+                            <circle cx="500" cy="100" r="15" class="nn-node nn-node-pulse" style="animation-delay: 0s;"/>
+                            <text x="500" y="105" text-anchor="middle" class="nn-text" font-size="10px">ML/DL</text>
+                            <circle cx="500" cy="170" r="15" class="nn-node nn-node-pulse" style="animation-delay: 0.5s;"/>
+                            <text x="500" y="175" text-anchor="middle" class="nn-text" font-size="10px">RAG</text>
+                            <circle cx="500" cy="240" r="15" class="nn-node nn-node-pulse" style="animation-delay: 1s;"/>
+                            <text x="500" y="245" text-anchor="middle" class="nn-text" font-size="10px">GEN AI</text>
+                            <circle cx="500" cy="310" r="15" class="nn-node nn-node-pulse" style="animation-delay: 1.5s;"/>
+                            <text x="500" y="315" text-anchor="middle" class="nn-text" font-size="10px">C++ DSA</text>
+
+                            <line x1="120" y1="200" x2="225" y2="125" class="nn-line"/>
+                            <line x1="120" y1="200" x2="225" y2="200" class="nn-line"/>
+                            <line x1="120" y1="200" x2="225" y2="275" class="nn-line"/>
+                            <line x1="375" y1="125" x2="485" y2="100" class="nn-line nn-line-flow"/>
+                            <line x1="375" y1="175" x2="485" y2="170" class="nn-line nn-line-flow" style="animation-delay: -0.5s;"/>
+                            <line x1="375" y1="225" x2="485" y2="240" class="nn-line nn-line-flow" style="animation-delay: -1s;"/>
+                            <line x1="375" y1="275" x2="485" y2="310" class="nn-line nn-line-flow" style="animation-delay: -1.5s;"/>
+                        </svg>
+
+                        <p class="text-center mt-6 text-sm italic text-gray-500">
+                            Fig. 02: Neural Network Architecture representing core competencies and learning vectors.
+                        </p>
+                    </div>
+                </aside>
+            </main>
+
+            <section class="mt-16 pt-6 border-t border-b border-tech-blue content-texture p-6 sm:p-8 rounded-md">
+                <h2 class="font-vt323 text-3xl sm:text-4xl text-tech-blue mb-4 tracking-widest">
+                    [SYSTEM COMMAND]: INITIATE COMMUNICATION MODULE
+                </h2>
+                <p class="text-sm italic text-gray-600 mb-6 max-w-2xl">
+                    Access point for interface initiation, data exchange, and collaborative project discussion. All protocols are open source.
+                </p>
+
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 items-start sm:items-center">
+                    <a href="mailto:23.kapoormanan@gmail.com"
+                       class="retro-button bg-tech-blue text-white font-bold py-3 px-6 text-sm flex items-center space-x-2 border-2 border-tech-blue w-full sm:w-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                            <rect x="3" y="4" width="18" height="16" rx="2" ry="2"></rect>
+                            <path d="M22 6L12 13 2 6"></path>
+                        </svg>
+                        <span>SEND DIRECT EMAIL</span>
+                    </a>
+
+                    <div class="flex space-x-4">
+                        <a href="https://github.com/manankapoor23" target="_blank" rel="noopener noreferrer" 
+                           class="text-sm text-tech-blue hover:underline hover:text-gray-700 transition duration-150 flex items-center space-x-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 3s-1.37-.37-4.48 1.48c-1.06-.29-2.19-.39-3.32-.39s-2.26.1-3.32.39c-3.11-1.85-4.48-1.48-4.48-1.48A5.07 5.07 0 0 0 4 4.77a5.44 5.44 0 0 0-1 3.78c0 5.42 3.3 6.61 6.44 7a3.37 3.37 0 0 0-.94 2.61V22"></path>
+                            </svg>
+                            <span>GitHub</span>
+                        </a>
+
+                        <a href="https://www.linkedin.com/in/manan-kapoor-8545002a0/" target="_blank" rel="noopener noreferrer" 
+                           class="text-sm text-tech-blue hover:underline hover:text-gray-700 transition duration-150 flex items-center space-x-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                            <span>LinkedIn</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="mt-16 pt-4 text-xs text-gray-500 text-center border-t border-gray-300 content-texture p-4">
+                [SYS-STATUS] System Specification Apple MacBook M2 | Licensed under MIT | &copy; 2025 MANAN KAPOOR.
+            </footer>
+        </div>
+
+        </div>
+    
+    <script>
+        // Global variable for uptime seconds
+        let seconds = 0;
+        
+        // --- 3.1. STATS FUNCTIONS (Uptime, CPU, RAM) ---
+        function formatTime(totalSeconds) {
+            const h = Math.floor(totalSeconds / 3600);
+            const m = Math.floor((totalSeconds % 3600) / 60);
+            const s = totalSeconds % 60;
+            const pad = (num) => String(num).padStart(2, '0');
+            return `${pad(h)}:${pad(m)}:${pad(s)}`;
+        }
+
+        function simulateResourceUsage() {
+            // CPU Simulation (10.0% to 90.0%)
+            const cpuLoad = (Math.random() * 80 + 10).toFixed(1); 
+            const cpuElement = document.getElementById('cpu-load');
+            if (cpuElement) { cpuElement.textContent = `${cpuLoad}%`; }
+
+            // RAM Simulation (1.0 GB to 7.0 GB of 8.0 GB)
+            const totalRAM = 8.0; 
+            const usedRAM = (Math.random() * 6 + 1).toFixed(1); 
+            const ramElement = document.getElementById('ram-usage');
+            if (ramElement) { ramElement.textContent = `${usedRAM}/${totalRAM.toFixed(1)} GB`; }
+        }
+
+        function updateSystemStats() {
+            // Update Uptime
+            seconds++;
+            const uptimeString = formatTime(seconds);
+            const uptimeElement = document.getElementById('current-uptime');
+            if (uptimeElement) { uptimeElement.textContent = uptimeString; }
+
+            // Update CPU and RAM
+            simulateResourceUsage();
+        }
+
+        // --- 3.2. LOADING SEQUENCE ---
+        const loadingMessages = ["Initializing BIOS Sequence... [STATUS: OK]",
+        "Loading Core Kernel (Manan) Modules...",
+        "STATUS: User Profile Retrieval Initiated...",
+        "------------------------------------",
+        
+        "-> Retrieving System Alias: MANAN KAPOOR",
+        "-> Checking Profile Data Integrity... [100%]",
+        
+        "STATUS: PROFILE_DATA_FOUND",
+        
+        "-> **Birthdate:** 23 November 2005",
+        "-> **Age:** 19 (Verifying against current timestamp... OK)",
+        
+        "-> **Core Interests:** Cricket, Music, AI / Machine Learning (ML)",
+        "-> **System Proficiencies:** C++, DSA, Generative AI Architectures",
+        
+        "------------------------------------",
+        "Verifying User Authentication... SUCCESS",
+        "Launching Main Shell Interface...",
+        "SYSTEM READY.",
+    
+        ];
+
+        let messageIndex = 0;
+        const loaderElement = document.getElementById('initial-loader');
+
+        function appendMessage() {
+            if (messageIndex < loadingMessages.length) {
+                const message = loadingMessages[messageIndex];
+                
+                const newLine = document.createElement('p');
+                newLine.style.color = message.includes('ERROR') ? '#ff4141' : (message.includes('STATUS') ? '#ffc107' : '#00ff41');
+                newLine.textContent = `[ ${new Date().toTimeString().split(' ')[0]} ] ${message}`;
+                loaderElement.appendChild(newLine);
+                loaderElement.scrollTop = loaderElement.scrollHeight;
+
+                messageIndex++;
+                
+                // Add a slight variable delay
+                setTimeout(appendMessage, Math.random() * 400 + 100); 
+                } else {
+            // Once all messages are displayed, reveal the prompt
+            setTimeout(() => {
+                document.getElementById('continue-prompt').style.display = 'block';
+                // Also enable ENTER key to trigger the same action
+                document.addEventListener('keydown', handleEnterKey);
+            }, 500); 
+        }
+
+       
+        }
+        // New function to handle the Enter key press
+function handleEnterKey(event) {
+    if (event.key === 'Enter') {
+        showMainTerminal();
+        document.removeEventListener('keydown', handleEnterKey); // Remove listener after use
+    }
+}
+
+function showMainTerminal() {
+    const userName = localStorage.getItem('sessionUserName') || 'GUEST';
+    const mainUI = document.getElementById('main-terminal-ui');
+    const startupSound = document.getElementById('startup-sound');
+    
+    // 1. Play the sound (Now guaranteed to work because it's tied to the user's click/key press)
+    if (startupSound) {
+        startupSound.play().catch(e => console.error("Error playing audio:", e));
+    }
+    
+    // 2. Hide loader and show main UI
+    loaderElement.style.display = 'none';
+    mainUI.style.display = 'block';
+
+    // 3. Populate the terminal output log (Your existing code)
+    const terminalOutput = document.getElementById('terminal-output');
+    if (terminalOutput) {
+        // --- THIS WAS LIKELY MISSING/INCORRECTLY WRAPPED ---
+        terminalOutput.innerHTML = `
+            <pre style="color: #00ff41; font-family: monospace; white-space: pre-wrap;">
+                [ ${new Date().toTimeString().split(' ')[0]} ] :: Welcome, **${userName}**. System ready for command input.
+            </pre>
+        `;
+    }
+
+    
+    // 4. Start the stats timer
+    setInterval(updateSystemStats, 1000); 
+}
+
+
+  
+
+        // The function called when the <body> loads
+        function startTerminalLoading() {
+            const userName = localStorage.getItem('sessionUserName');
+            
+            if (!userName) {
+                // Redirect if no username is found, ensuring the sign-in flow is followed
+                window.location.href = 'index.html'; 
+                return;
+            }
+
+            // Start the loading sequence
+            appendMessage();
+        }
+    </script>
+
+    <script>
+        // Define commands first
+        const commands = {
+            help: {
+                output: "Available commands: about, github, linkedin, projects, email, darkmode on/off",
+                action: () => {}
+            },
+            about: {
+                output: "Showing about info...",
+                action: () => {}
+            },
+            github: {
+                output: "Opening GitHub profile...",
+                action: () => window.open('https://github.com/manankapoor23', '_blank')
+            },
+            linkedin: {
+                output: "Opening LinkedIn profile...",
+                action: () => window.open('https://www.linkedin.com/in/manan-kapoor-8545002a0/', '_blank')
+            },
+            projects: {
+                output: "Showing project portfolio...",
+                action: () => {}
+            },
+            email: {
+                output: "Preparing email...",
+                action: () => window.location.href = "mailto:23.kapoormanan@gmail.com"
+            }
+        };
+
+        const darkModeToggleBtn = document.getElementById('darkmode-toggle');
+        function isDarkModeOn() {
+            return document.body.classList.contains('dark-mode');
+    }
+        function setDarkMode(on) {
+            if(on) {
+                document.body.classList.add('dark-mode');
+                darkModeToggleBtn.textContent = "Light Mode";
+            } else {
+                document.body.classList.remove('dark-mode');
+                darkModeToggleBtn.textContent = "Dark Mode";
+            }
+        }
+        
+        // Add terminal commands for dark mode
+        commands['darkmode on'] = {
+        output: isDarkModeOn() ? "Dark mode is ALREADY ON." : "Dark mode activated.",
+        action: () => {
+            if (!isDarkModeOn()) {
+                setDarkMode(true);
+            }
+        }
+    };
+    commands['darkmode off'] = {
+        output: isDarkModeOn() ? "Dark mode deactivated." : "Dark mode is ALREADY OFF.",
+        action: () => {
+            if (isDarkModeOn()) {
+                setDarkMode(false);
+            }
+        }
+    };
+
+        
+        // Dark Mode Toggle Listener
+        darkModeToggleBtn.addEventListener('click', () => {
+        setDarkMode(!isDarkModeOn());
+    });
+    commands['help'] = {
+        output: "Available commands: about, github, linkedin, projects, email, darkmode on/off",
+        action: () => {}
+    };
+ 
+        
+        // Command Input Listener
+        document.addEventListener('DOMContentLoaded', () => {
+        const terminalInput = document.getElementById('terminal-input');
+        const terminalOutput = document.getElementById('terminal-output');
+
+        if (terminalInput && terminalOutput) {
+            terminalInput.addEventListener('keydown', function(e) {
+                if(e.key === 'Enter') {
+                    const input = terminalInput.value.trim().toLowerCase();
+                    terminalInput.value = "";
+
+                    // Re-calculate output for dynamic commands (like darkmode)
+                    const commandEntry = commands[input];
+                    let outputMessage = `Command not found. Type <span class="text-tech-blue">help</span>.`;
+                    let commandAction = null;
+
+                    if (commandEntry) {
+                        // Special handling for dynamic output (dark mode)
+                        if (input === 'darkmode on') {
+                            outputMessage = isDarkModeOn() ? "Dark mode is ALREADY ON." : "Dark mode activated.";
+                        } else if (input === 'darkmode off') {
+                            outputMessage = isDarkModeOn() ? "Dark mode deactivated." : "Dark mode is ALREADY OFF.";
+                        } else {
+                            outputMessage = commandEntry.output;
+                        }
+                        commandAction = commandEntry.action;
+                    }
+
+                    terminalOutput.innerHTML += `<div>> ${input}<br>${outputMessage}</div>`;
+                    if(commandAction) commandAction();
+
+                    // Scroll terminal output
+                    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+                }
+                });
+            }
+        });
+    </script>
+
+    
+</body>
+</html>

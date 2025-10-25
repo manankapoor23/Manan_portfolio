@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MananXP - Welcome</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tahoma:wght@400;700&family=Verdana:wght@400&display=swap" rel="stylesheet">
+    <style>
+        /* --- General XP Body Styles --- */
+        body {
+            background: linear-gradient(to bottom, #3a6ea5 0%, #4a80b1 100%); /* XP blue gradient */
+            font-family: 'Tahoma', sans-serif;
+            color: #fff; /* White text for most elements */
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Push header/footer to ends */
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; /* No scrollbars */
+        }
+
+        /* --- Main Content Area --- */
+        .xp-login-container {
+            flex-grow: 1; /* Take up available space */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-bottom: 80px; /* Account for the bottom bar */
+        }
+
+        /* --- MananXP Logo --- */
+        .mananxp-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            color: #000; /* Dark text for XP logo */
+        }
+        .mananxp-logo .windows-text {
+            font-family: 'Verdana', sans-serif; /* Slightly different font for "Windows" */
+            font-size: 40px;
+            font-weight: bold;
+            line-height: 1;
+            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4);
+        }
+        .mananxp-logo .xp-text {
+            font-family: 'Verdana', sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 1;
+            color: #f7a01d; /* XP Orange */
+            margin-left: 5px;
+            vertical-align: super; /* Simulate superscript XP */
+            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4);
+        }
+        .mananxp-logo .manan-text {
+            font-family: 'Tahoma', sans-serif;
+            font-size: 40px;
+            font-weight: bold;
+            line-height: 1;
+            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4);
+            margin-right: 5px; /* Space between "Manan" and "XP" part of the logo */
+        }
+        
+        /* The classic Windows flag icon (placeholder for now) */
+        .windows-flag {
+            width: 50px;
+            height: 50px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="0" y="0" width="45" height="45" fill="%23f65314"/><rect x="55" y="0" width="45" height="45" fill="%237cbb00"/><rect x="0" y="55" width="45" height="45" fill="%2300a1f1"/><rect x="55" y="55" width="45" height="45" fill="%23ffbb00"/></svg>') no-repeat center center;
+            background-size: contain;
+            margin-right: 15px;
+            position: relative;
+            top: -5px; /* Adjust vertical alignment */
+        }
+
+
+        .welcome-message {
+            font-size: 1.1em;
+            margin-top: 15px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* --- User Tile --- */
+        .user-tile {
+            background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-decoration: none; /* Remove underline for anchor tag */
+            color: inherit; /* Inherit text color */
+        }
+        .user-tile:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            border-color: #f7a01d; /* XP Orange highlight */
+            transform: translateY(-5px);
+        }
+        .user-tile:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .user-icon-xp {
+            width: 80px;
+            height: 80px;
+            background-color: #e0e0e0;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            line-height: 80px;
+            font-size: 3em;
+            color: #666;
+            text-align: center;
+            text-shadow: none;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .user-name-display {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        /* --- Bottom Bar --- */
+        .bottom-bar {
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(to bottom, #2b5797 0%, #1e3c78 100%); /* Darker blue gradient */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            box-sizing: border-box;
+            color: #fff;
+            font-size: 0.9em;
+        }
+
+        .turn-off-button {
+            background: linear-gradient(to bottom, #d64d30 0%, #b32f17 100%); /* Red gradient */
+            border: 1px solid #a3220e;
+            border-radius: 3px;
+            color: #fff;
+            padding: 8px 15px;
+            font-family: 'Tahoma', sans-serif;
+            font-size: 0.9em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background 0.2s, transform 0.1s;
+        }
+        .turn-off-button:hover {
+            background: linear-gradient(to bottom, #e05e40 0%, #c4381f 100%);
+            transform: translateY(-1px);
+        }
+        .turn-off-button:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        .turn-off-icon {
+            width: 16px;
+            height: 16px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7-7-3.13-7-7h2c0 2.76 2.24 5 5 5s5-2.24 5-5-2.24-5-5-5z"/></svg>') no-repeat center center;
+            background-size: contain;
+        }
+
+        .footer-info {
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Input field for alias if user hasn't set one */
+        .alias-input-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .alias-input-box {
+            background-color: #e0e0e0;
+            border: 1px solid #7f7f7f;
+            border-radius: 5px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            width: 300px;
+        }
+        .alias-input-box h2 {
+            font-size: 1.2em;
+            color: #000;
+            margin-bottom: 15px;
+        }
+        .alias-input-box input {
+            width: calc(100% - 20px);
+            padding: 8px 10px;
+            margin-bottom: 15px;
+            border: 1px solid #7f7f7f;
+            border-radius: 3px;
+            font-family: 'Tahoma', sans-serif;
+            font-size: 1em;
+        }
+        .alias-input-box button {
+            background-color: #316ac5;
+            color: #fff;
+            border: 1px solid #23519c;
+            border-radius: 3px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-family: 'Tahoma', sans-serif;
+            font-size: 1em;
+            transition: background-color 0.2s;
+        }
+        .alias-input-box button:hover {
+            background-color: #23519c;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="xp-login-container">
+        <div class="mananxp-logo">
+            <div class="windows-flag"></div>
+            <span class="manan-text">Manan</span><span class="xp-text">XP</span>
+        </div>
+        <div class="welcome-message">To begin, click your user name</div>
+
+        <a href="#" class="user-tile" id="user-tile-link">
+            <div class="user-icon-xp">👤</div>
+            <div class="user-name-display" id="displayed-username">Manan Kapoor</div>
+        </a>
+    </div>
+
+    <div class="bottom-bar">
+        <button class="turn-off-button">
+            <span class="turn-off-icon"></span>
+            Turn off computer
+        </button>
+        <div class="footer-info">
+            After you log on, you can add or change accounts.<br>
+            Just go to Control Panel and click User Accounts.
+        </div>
+    </div>
+
+    <div class="alias-input-overlay" id="alias-input-overlay" style="display:none;">
+        <div class="alias-input-box">
+            <h2>Enter your Alias</h2>
+            <input type="text" id="alias-input-field" placeholder="e.g., Manan Kapoor" />
+            <button onclick="saveAliasAndProceed()">Continue</button>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const storedUserName = localStorage.getItem('sessionUserName');
+            const aliasInputOverlay = document.getElementById('alias-input-overlay');
+            const displayedUsername = document.getElementById('displayed-username');
+            const userTileLink = document.getElementById('user-tile-link');
+
+            if (!storedUserName) {
+                // If no alias is set, show the overlay to prompt for it
+                aliasInputOverlay.style.display = 'flex';
+                document.getElementById('alias-input-field').focus();
+
+                // Allow Enter key to submit alias from the overlay
+                document.getElementById('alias-input-field').addEventListener('keypress', function(event) {
+                    if (event.key === 'Enter') {
+                        saveAliasAndProceed();
+                    }
+                });
+
+            } else {
+                // If alias exists, display it and make the tile clickable
+                displayedUsername.textContent = storedUserName;
+                userTileLink.addEventListener('click', login);
+            }
+        });
+
+        function saveAliasAndProceed() {
+            const aliasInput = document.getElementById('alias-input-field');
+            const userName = aliasInput.value.trim();
+
+            if (userName) {
+                localStorage.setItem('sessionUserName', userName);
+                document.getElementById('displayed-username').textContent = userName;
+                document.getElementById('alias-input-overlay').style.display = 'none';
+                
+                // Now that alias is set, enable the user tile to log in
+                document.getElementById('user-tile-link').addEventListener('click', login);
+            } else {
+                alert('Please enter an alias to proceed.');
+            }
+        }
+
+        function login(event) {
+            // Prevent default anchor link behavior if triggered by click
+            if (event) event.preventDefault(); 
+            
+            // Redirect to the main terminal page
+            window.location.href = 'main.html'; 
+        }
+
+        // The "Turn off computer" button is just for aesthetics on this page.
+        // You can add functionality if you wish, e.g., showing a shutdown animation.
+        document.querySelector('.turn-off-button').addEventListener('click', () => {
+            alert('Initiating shutdown sequence...'); // Placeholder
+            // In a real app, you might fade to black, or navigate away.
+        });
+
+    </script>
+</body>
+</html>
