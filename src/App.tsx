@@ -102,7 +102,7 @@ function App() {
               className="text-4xl leading-[1.05] md:text-6xl"
               style={{ fontFamily: 'var(--font-serif)' }}
             >
-              Punjabi NLP and LLM systems research engineer.
+              AI/ML systems & research engineer.
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-relaxed md:text-lg">
               I am a Computer Engineering student at Thapar Institute of Engineering and
