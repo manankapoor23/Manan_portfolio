@@ -1,0 +1,69 @@
+MANAN KAPOOR
+
+Contact
+- Phone: +91 99999 35670
+- Location: Chandigarh, India
+- Email: 23.kapoormanan@gmail.com
+- LinkedIn: linkedin.com/in/manan-kapoor
+- GitHub: github.com/manankapoor23
+- LeetCode: leetcode.com/u/manankapoor23
+- Portfolio: mkap.netlify.app
+
+EDUCATION
+Thapar Institute of Engineering and Technology, Punjab, India
+Bachelor of Engineering in Computer Engineering (COE)
+Duration: 2024 - 2028
+CGPA: 8.07 / 10.00
+
+EXPERIENCE
+Research Intern | 2025 - Present
+Thapar Institute of Engineering and Technology, Patiala, India
+
+Skills used:
+Python, NLP, Dataset Engineering, Punjabi NLP, Instruction Tuning,
+LLM Fine-Tuning (QLoRA), Teacher-Model Supervision, Controlled Text Generation,
+BLEU and BERTScore Evaluation, Gemini API, Unsloth, HuggingFace Transformers
+
+Key contributions:
+- Designed and published PRISM-Punjabi (HuggingFace), the first multi-task Punjabi instruction dataset for controlled text rewriting.
+- Processed 16.43M tokens from 600+ curated web sources.
+- Built a Gemini 2.0 Flash teacher-model supervision pipeline generating 91,000+ instruction-conditioned samples across 6 rewriting tasks.
+- Applied task-specific structural validation eliminating about 37% corrupt samples and achieving 100% instruction compliance with BERTScore >= 0.929.
+- Fully fine-tuned LLaMA 3.1 8B on A100 GPUs via Unsloth (Alpaca format, English instruction to Punjabi I/O).
+- Evaluated against 4 instruction baselines across 5 metrics on 6 tasks.
+
+PROJECTS
+1) KV-Paged Inference System for Transformer Models
+Link: https://github.com/manankapoor23/KV-Paged-Attention
+Tech: Python, PyTorch, Transformers, ML Systems, OS Concepts
+- Architected a paged Key-Value (KV) cache system for transformer inference, decoupling logical token positions from physical memory to enable 40%+ memory efficiency gains in long-context decoding.
+- Designed allocator-backed KV pages with page tables, reference counting, prefix reuse, and copy-on-write semantics, reducing redundant allocations by 35%.
+- Validated paged attention through numerical equivalence testing against naive attention, with less than 0.1% precision delta.
+
+2) PRISM - Punjabi Rewriting Instructional Supervised Multi-task Model
+Link: huggingface.co/datasets/manankap23/PRISM-Punjabi
+Tech: Python, PyTorch, Unsloth, HuggingFace, LLM Fine-Tuning, Gemini API, NLP, A100 GPU
+- Curated 91,000+ instruction samples across 6 Punjabi text transformation tasks using a Gemini 2.0 Flash teacher-supervision pipeline on 16M+ tokens.
+- Published dataset on HuggingFace under CC-BY 4.0.
+- Fully fine-tuned LLaMA 3.1 8B on A100 GPUs via Unsloth using cross-lingual Alpaca format (English instructions, Punjabi I/O).
+- Benchmarked against 4 instruction-tuned baselines (LLaMA-3.1-Instruct, Mistral-7B, Gemma-7B, Phi-3-Mini) across BLEU, chrF++, ROUGE-L, BERTScore-F1, and Word-F1.
+
+3) Natural Language to SQL Query System
+Link: github.com/manankapoor23/NL-SQL
+Tech: Python, LangChain, LLMs, SQL, Slack API, Prompt Engineering
+- Built an LLM-powered Natural Language to SQL pipeline that converts user questions into executable SQL queries.
+- Developed a Slack-integrated data assistant using slash commands to generate schema-aware SQL, execute queries, and return structured results in Slack.
+
+TECHNICAL SKILLS
+Languages: Python, C++, JavaScript, R
+ML and AI: Machine Learning, Deep Learning, Neural Networks, Generative AI, Transformers,
+Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), Prompt Engineering, Fine-Tuning
+Data and ML Engineering: Data Cleaning, Feature Engineering, Cross-Validation,
+Hyperparameter Tuning, Model Evaluation
+Libraries and Frameworks: Pandas, NumPy, Scikit-learn, PyTorch, Matplotlib, Seaborn,
+Hugging Face Transformers, LangChain, OpenAI SDK, NLTK
+Backend and Systems: JSON, Model Serving, Inference Pipelines
+Databases: SQL, PostgreSQL, Vector Databases (FAISS, Chroma)
+Tools: Git and GitHub, Docker, VS Code, Jupyter, RStudio
+CS Fundamentals: Data Structures and Algorithms, OOP, Operating Systems, DBMS,
+Computer Networks, Probability and Statistics
