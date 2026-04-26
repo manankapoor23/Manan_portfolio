@@ -1,329 +1,444 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MananXP - Welcome</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tahoma:wght@400;700&family=Verdana:wght@400&display=swap" rel="stylesheet">
-    <style>
-        /* --- General XP Body Styles --- */
-        body {
-            background: linear-gradient(to bottom, #3a6ea5 0%, #4a80b1 100%); /* XP blue gradient */
-            font-family: 'Tahoma', sans-serif;
-            color: #fff; /* White text for most elements */
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; /* Push header/footer to ends */
-            align-items: center;
-            height: 100vh;
-            overflow: hidden; /* No scrollbars */
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Manan Kapoor - B.E. Computer Engineering @ Thapar Institute. Research Intern working on NLP, LLMs, and ML infrastructure.">
+  <meta property="og:title" content="Manan Kapoor | Terminal Portfolio">
+  <meta property="og:description" content="Manan Kapoor - B.E. Computer Engineering @ Thapar Institute. Research Intern working on NLP, LLMs, and ML infrastructure.">
+  <title>Manan Kapoor | Terminal</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg:           #000000;
+      --bg-alt:       #0a0a0a;
+      --surface:      #111111;
+      --text:         #ffffff;
+      --text-muted:   #8a8a8a;
+      --text-dim:     #5a5a5a;
+      --border:       #1f1f1f;
+      --inverse-bg:   #ffffff;
+      --inverse-text: #000000;
+    }
 
-        /* --- Main Content Area --- */
-        .xp-login-container {
-            flex-grow: 1; /* Take up available space */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding-bottom: 80px; /* Account for the bottom bar */
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        /* --- MananXP Logo --- */
-        .mananxp-logo {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-            color: #000; /* Dark text for XP logo */
-        }
-        .mananxp-logo .windows-text {
-            font-family: 'Verdana', sans-serif; /* Slightly different font for "Windows" */
-            font-size: 40px;
-            font-weight: bold;
-            line-height: 1;
-            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4);
-        }
-        .mananxp-logo .xp-text {
-            font-family: 'Verdana', sans-serif;
-            font-size: 20px;
-            font-weight: bold;
-            line-height: 1;
-            color: #f7a01d; /* XP Orange */
-            margin-left: 5px;
-            vertical-align: super; /* Simulate superscript XP */
-            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4);
-        }
-        .mananxp-logo .manan-text {
-            font-family: 'Tahoma', sans-serif;
-            font-size: 40px;
-            font-weight: bold;
-            line-height: 1;
-            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4);
-            margin-right: 5px; /* Space between "Manan" and "XP" part of the logo */
-        }
-        
-        /* The classic Windows flag icon (placeholder for now) */
-        .windows-flag {
-            width: 50px;
-            height: 50px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="0" y="0" width="45" height="45" fill="%23f65314"/><rect x="55" y="0" width="45" height="45" fill="%237cbb00"/><rect x="0" y="55" width="45" height="45" fill="%2300a1f1"/><rect x="55" y="55" width="45" height="45" fill="%23ffbb00"/></svg>') no-repeat center center;
-            background-size: contain;
-            margin-right: 15px;
-            position: relative;
-            top: -5px; /* Adjust vertical alignment */
-        }
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg);
+      color: var(--text);
+    }
 
+    body {
+      font-family: 'JetBrains Mono', 'SF Mono', 'IBM Plex Mono', ui-monospace, monospace;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
 
-        .welcome-message {
-            font-size: 1.1em;
-            margin-top: 15px;
-            margin-bottom: 30px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        }
+    h1, h2, h3, h4, strong {
+      font-weight: 600;
+      line-height: 1.2;
+    }
 
-        /* --- User Tile --- */
-        .user-tile {
-            background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            border-radius: 8px;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            width: 150px;
-            height: 150px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            text-decoration: none; /* Remove underline for anchor tag */
-            color: inherit; /* Inherit text color */
-        }
-        .user-tile:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-            border-color: #f7a01d; /* XP Orange highlight */
-            transform: translateY(-5px);
-        }
-        .user-tile:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        }
+    h2 { font-size: 28px; margin-bottom: 24px; color: var(--text); }
+    h3 { font-size: 20px; margin-bottom: 8px; }
 
-        .user-icon-xp {
-            width: 80px;
-            height: 80px;
-            background-color: #e0e0e0;
-            border-radius: 50%;
-            margin-bottom: 10px;
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            line-height: 80px;
-            font-size: 3em;
-            color: #666;
-            text-align: center;
-            text-shadow: none;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
-        }
-        .user-name-display {
-            font-weight: bold;
-            font-size: 1.2em;
-        }
+    p, ul { margin-bottom: 16px; }
+    ul { padding-left: 24px; }
+    li { margin-bottom: 8px; }
 
-        /* --- Bottom Bar --- */
-        .bottom-bar {
-            width: 100%;
-            height: 60px;
-            background: linear-gradient(to bottom, #2b5797 0%, #1e3c78 100%); /* Darker blue gradient */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            box-sizing: border-box;
-            color: #fff;
-            font-size: 0.9em;
-        }
+    a {
+      color: var(--text);
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
 
-        .turn-off-button {
-            background: linear-gradient(to bottom, #d64d30 0%, #b32f17 100%); /* Red gradient */
-            border: 1px solid #a3220e;
-            border-radius: 3px;
-            color: #fff;
-            padding: 8px 15px;
-            font-family: 'Tahoma', sans-serif;
-            font-size: 0.9em;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transition: background 0.2s, transform 0.1s;
-        }
-        .turn-off-button:hover {
-            background: linear-gradient(to bottom, #e05e40 0%, #c4381f 100%);
-            transform: translateY(-1px);
-        }
-        .turn-off-button:active {
-            transform: translateY(0);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
-        .turn-off-icon {
-            width: 16px;
-            height: 16px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7-7-3.13-7-7h2c0 2.76 2.24 5 5 5s5-2.24 5-5-2.24-5-5-5z"/></svg>') no-repeat center center;
-            background-size: contain;
-        }
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0; 
+    }
 
-        .footer-info {
-            font-size: 0.8em;
-            color: rgba(255, 255, 255, 0.7);
-        }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
 
-        /* Input field for alias if user hasn't set one */
-        .alias-input-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .alias-input-box {
-            background-color: #e0e0e0;
-            border: 1px solid #7f7f7f;
-            border-radius: 5px;
-            padding: 25px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            width: 300px;
-        }
-        .alias-input-box h2 {
-            font-size: 1.2em;
-            color: #000;
-            margin-bottom: 15px;
-        }
-        .alias-input-box input {
-            width: calc(100% - 20px);
-            padding: 8px 10px;
-            margin-bottom: 15px;
-            border: 1px solid #7f7f7f;
-            border-radius: 3px;
-            font-family: 'Tahoma', sans-serif;
-            font-size: 1em;
-        }
-        .alias-input-box button {
-            background-color: #316ac5;
-            color: #fff;
-            border: 1px solid #23519c;
-            border-radius: 3px;
-            padding: 8px 15px;
-            cursor: pointer;
-            font-family: 'Tahoma', sans-serif;
-            font-size: 1em;
-            transition: background-color 0.2s;
-        }
-        .alias-input-box button:hover {
-            background-color: #23519c;
-        }
+    /* Navigation */
+    nav {
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      font-size: 14px;
+    }
 
-    </style>
+    .nav-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .nav-prompt {
+      color: var(--text-dim);
+      margin-right: 8px;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+    }
+
+    .nav-link.active {
+      color: var(--text);
+      text-decoration: underline;
+    }
+
+    .nav-link:hover {
+      color: var(--text);
+    }
+
+    .nav-sep {
+      color: var(--text-dim);
+    }
+
+    /* Sections */
+    section {
+      padding: 48px 0;
+    }
+
+    /* Hero */
+    .hero-container {
+      padding-top: 48px;
+    }
+
+    .term-block {
+      background-color: var(--bg-alt);
+      border: 1px solid var(--border);
+      padding: 24px;
+      margin-bottom: 24px;
+      font-size: 14px;
+      white-space: pre-wrap;
+      min-height: 200px;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1em;
+      background-color: var(--text);
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .links-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 14px;
+      margin-bottom: 48px;
+    }
+
+    .links-row a {
+      color: var(--text);
+    }
+
+    .email-link {
+      cursor: pointer;
+    }
+
+    .btn {
+      display: inline-block;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 16px;
+      background-color: transparent;
+      border: 0;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background-color: var(--inverse-bg);
+      color: var(--inverse-text);
+      border: 1px solid var(--inverse-bg);
+    }
+
+    .btn-primary:focus {
+      outline: 1px solid var(--text);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--inverse-bg);
+      text-decoration: none;
+    }
+
+    /* Cards */
+    .card {
+      border: 1px solid var(--border);
+      padding: 24px;
+      margin-bottom: 24px;
+      background-color: var(--bg-alt);
+    }
+
+    .card-heading {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .card-heading strong {
+      font-weight: 600;
+    }
+
+    .card-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    /* Skills */
+    .skills-list {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 16px 8px;
+      font-size: 14px;
+    }
+
+    .skills-cat {
+      color: var(--text-dim);
+    }
+
+    .skills-items {
+      color: var(--text);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .skills-list {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+      .skills-cat {
+        margin-top: 12px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="xp-login-container">
-        <div class="mananxp-logo">
-            <div class="windows-flag"></div>
-            <span class="manan-text">Manan</span><span class="xp-text">XP</span>
-        </div>
-        <div class="welcome-message">To begin, click your user name</div>
 
-        <a href="#" class="user-tile" id="user-tile-link">
-            <div class="user-icon-xp">👤</div>
-            <div class="user-name-display" id="displayed-username">Manan Kapoor</div>
-        </a>
+  <nav>
+    <div class="container nav-inner">
+      <span class="nav-prompt">manan@kapoor:~$</span>
+      <a href="#about" class="nav-link active">[about]</a>
+      <span class="nav-sep">|</span>
+      <a href="#experience" class="nav-link">[experience]</a>
+      <span class="nav-sep">|</span>
+      <a href="#projects" class="nav-link">[projects]</a>
+      <span class="nav-sep">|</span>
+      <a href="#skills" class="nav-link">[skills]</a>
+      <span class="nav-sep">|</span>
+      <a href="#contact" class="nav-link">[contact]</a>
     </div>
+  </nav>
 
-    <div class="bottom-bar">
-        <button class="turn-off-button">
-            <span class="turn-off-icon"></span>
-            Turn off computer
-        </button>
-        <div class="footer-info">
-            After you log on, you can add or change accounts.<br>
-            Just go to Control Panel and click User Accounts.
-        </div>
+  <main class="container">
+    <section id="about" class="hero-container">
+      <div class="term-block" id="term-typing"></div>
+      <div class="links-row">
+        <a class="email-link" id="email-btn">[email]</a> &rarr; 
+        <a href="https://linkedin.com/in/manan-kapoor-8545002a0" target="_blank" rel="noopener noreferrer">[linkedin]</a>
+        <a href="https://github.com/manankapoor23" target="_blank" rel="noopener noreferrer">[github]</a>
+        <a href="https://leetcode.com/u/manankapoor23" target="_blank" rel="noopener noreferrer">[leetcode]</a>
+        <a href="https://mkap.netlify.app" target="_blank" rel="noopener noreferrer">[portfolio]</a>
+      </div>
+      <a href="https://huggingface.co/manankap23" target="_blank" rel="noopener noreferrer" class="btn btn-primary">[resume]</a>
+    </section>
+
+    <hr>
+
+    <section id="experience">
+      <h2>## ./experience</h2>
+      <h3>Research Intern &mdash; Thapar Institute of Engineering &amp; Technology, Patiala</h3>
+      <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 24px;">2025 &ndash; Present</p>
+      <ul>
+        <li>Designed and published PRISM-Punjabi (HuggingFace), the first multi-task Punjabi instruction dataset &mdash; 16.43M tokens from 600+ curated web sources; built a Gemini 2.0 Flash teacher-model supervision pipeline generating 91,000+ instruction-conditioned samples across 6 rewriting tasks; task-specific structural validation eliminating ~37% corrupt samples, achieving 100% instruction-compliance with BERTScore &ge; 0.929</li>
+        <li>Full fine-tuned LLaMA 3.1 8B on A100 GPUs via Unsloth (Alpaca format, English instruction &rarr; Punjabi I/O); evaluated against 4 instruct baselines across 5 metrics on 6 tasks</li>
+      </ul>
+    </section>
+
+    <hr>
+
+    <section id="projects">
+      <h2>## ./projects</h2>
+      
+      <div class="card">
+        <div class="card-heading"><strong>[PRISM &mdash; Punjabi Rewriting Instructional Supervised Multi-task Model]</strong></div>
+        <span class="card-meta">Python | PyTorch | Unsloth | HuggingFace | LLM Fine-Tuning | Gemini API | NLP | A100 GPU<br>&rarr; <a href="https://huggingface.co/datasets/manankap23/PRISM-Punjabi" target="_blank" rel="noopener noreferrer">huggingface.co/datasets/manankap23/PRISM-Punjabi</a></span>
+        <ul>
+          <li>Curated 91,000+ instruction samples across 6 Punjabi text transformation tasks using Gemini 2.0 Flash teacher-supervision on 16M+ tokens; published on HuggingFace (CC-BY 4.0)</li>
+          <li>Full fine-tuned LLaMA 3.1 8B on A100 GPUs via Unsloth with cross-lingual Alpaca format (English instructions, Punjabi I/O); benchmarked against 4 instruction-tuned baselines (LLaMA-3.1-Instruct, Mistral-7B, Gemma-7B, Phi-3-Mini) across BLEU, chrF++, ROUGE-L, BERTScore-F1, Word-F1</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-heading"><strong>[KV-Paged Inference System for Transformer Models]</strong></div>
+        <span class="card-meta">Python | PyTorch | Transformers | ML Systems | OS Concepts<br>&rarr; <a href="https://github.com/manankapoor23/KV-Paged-Attention" target="_blank" rel="noopener noreferrer">github.com/manankapoor23/KV-Paged-Attention</a></span>
+        <ul>
+          <li>Architected a paged Key-Value (KV) cache system for transformer inference, decoupling logical token positions from physical memory &mdash; 40%+ memory efficiency gains in long-context decoding</li>
+          <li>Designed allocator-backed KV pages with page tables, reference counting, prefix reuse, and copy-on-write semantics &mdash; reducing redundant allocations by ~35% across concurrent requests</li>
+          <li>Validated paged attention via numerical equivalence testing against naive attention with &lt;0.1% precision delta</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-heading"><strong>[Natural Language to SQL Query System]</strong></div>
+        <span class="card-meta">Python | LangChain | LLMs | SQL | Slack API | Prompt Engineering<br>&rarr; <a href="https://github.com/manankapoor23/NL-SQL" target="_blank" rel="noopener noreferrer">github.com/manankapoor23/NL-SQL</a></span>
+        <ul>
+          <li>Built an LLM-powered Natural Language &rarr; SQL pipeline for intuitive querying of relational databases directly from Slack</li>
+          <li>Developed a Slack-integrated data assistant using LangChain &mdash; slash commands &rarr; schema-aware SQL &rarr; executed results returned in Slack</li>
+        </ul>
+      </div>
+    </section>
+
+    <hr>
+
+    <section id="skills">
+      <h2>## ./skills</h2>
+      <div class="skills-list">
+        <div class="skills-cat">languages</div>
+        <div class="skills-items">python | c++ | javascript | r</div>
+        
+        <div class="skills-cat">ml &amp; ai</div>
+        <div class="skills-items">transformers | llms | fine-tuning | rag | prompt engineering<br>instruction tuning | teacher-model supervision | generative ai</div>
+        
+        <div class="skills-cat">frameworks</div>
+        <div class="skills-items">pytorch | huggingface | unsloth | langchain | scikit-learn<br>pandas | numpy | openai sdk | nltk</div>
+        
+        <div class="skills-cat">evaluation</div>
+        <div class="skills-items">bleu | chrf++ | rouge-l | bertscore | word-f1</div>
+        
+        <div class="skills-cat">databases</div>
+        <div class="skills-items">postgresql | sql | faiss | chroma</div>
+        
+        <div class="skills-cat">tools</div>
+        <div class="skills-items">git | docker | jupyter | vs code</div>
+        
+        <div class="skills-cat">fundamentals</div>
+        <div class="skills-items">dsa | oop | os | dbms | networks | probability &amp; statistics</div>
+      </div>
+    </section>
+
+    <hr>
+
+    <section id="contact">
+      <h2>## ./contact</h2>
+      <div class="term-block" style="min-height: auto; padding: 16px;">
+$ reach --out
+
+  email     &rarr; 23.kapoormanan@gmail.com
+  linkedin  &rarr; linkedin.com/in/manan-kapoor-8545002a0
+  github    &rarr; github.com/manankapoor23
+  location  &rarr; Chandigarh, India
+      </div>
+      <a href="mailto:23.kapoormanan@gmail.com" class="btn btn-primary">[send message]</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      built by manan kapoor &mdash; 2025
     </div>
+  </footer>
 
-    <div class="alias-input-overlay" id="alias-input-overlay" style="display:none;">
-        <div class="alias-input-box">
-            <h2>Enter your Alias</h2>
-            <input type="text" id="alias-input-field" placeholder="e.g., Manan Kapoor" />
-            <button onclick="saveAliasAndProceed()">Continue</button>
-        </div>
-    </div>
+  <script>
+    // Typed text effect
+    const terminalText = `$ whoami\n> Manan Kapoor\n  B.E. Computer Engineering @ Thapar Institute, Punjab\n  CGPA: 8.07 / 10.00  |  2024–2028\n\n  Research Intern — Thapar Institute  (2025–Present)\n  Building Punjabi NLP systems, fine-tuned LLMs, and ML infrastructure.`;
+    const targetElement = document.getElementById('term-typing');
+    let idx = 0;
+    
+    function typeWriter() {
+      if (idx < terminalText.length) {
+        let char = terminalText.charAt(idx);
+        let currentHTML = targetElement.innerHTML.replace('<span class="cursor"></span>', '');
+        currentHTML += char === '\\n' ? '<br>' : char;
+        targetElement.innerHTML = currentHTML + '<span class="cursor"></span>';
+        idx++;
+        setTimeout(typeWriter, 30);
+      } else {
+        targetElement.innerHTML = terminalText + '<span class="cursor"></span>';
+      }
+    }
+    
+    // Start typing on load
+    window.addEventListener('load', typeWriter);
 
+    // Scroll spy for navigation
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-inner .nav-link');
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const storedUserName = localStorage.getItem('sessionUserName');
-            const aliasInputOverlay = document.getElementById('alias-input-overlay');
-            const displayedUsername = document.getElementById('displayed-username');
-            const userTileLink = document.getElementById('user-tile-link');
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -80% 0px',
+      threshold: 0
+    };
 
-            if (!storedUserName) {
-                // If no alias is set, show the overlay to prompt for it
-                aliasInputOverlay.style.display = 'flex';
-                document.getElementById('alias-input-field').focus();
-
-                // Allow Enter key to submit alias from the overlay
-                document.getElementById('alias-input-field').addEventListener('keypress', function(event) {
-                    if (event.key === 'Enter') {
-                        saveAliasAndProceed();
-                    }
-                });
-
-            } else {
-                // If alias exists, display it and make the tile clickable
-                displayedUsername.textContent = storedUserName;
-                userTileLink.addEventListener('click', login);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').substring(1) === entry.target.id) {
+              link.classList.add('active');
             }
-        });
-
-        function saveAliasAndProceed() {
-            const aliasInput = document.getElementById('alias-input-field');
-            const userName = aliasInput.value.trim();
-
-            if (userName) {
-                localStorage.setItem('sessionUserName', userName);
-                document.getElementById('displayed-username').textContent = userName;
-                document.getElementById('alias-input-overlay').style.display = 'none';
-                
-                // Now that alias is set, enable the user tile to log in
-                document.getElementById('user-tile-link').addEventListener('click', login);
-            } else {
-                alert('Please enter an alias to proceed.');
-            }
+          });
         }
+      });
+    }, observerOptions);
 
-        function login(event) {
-            // Prevent default anchor link behavior if triggered by click
-            if (event) event.preventDefault(); 
-            
-            // Redirect to the main terminal page
-            window.location.href = 'main.html'; 
-        }
+    sections.forEach(section => {
+      observer.observe(section);
+    });
 
-        // The "Turn off computer" button is just for aesthetics on this page.
-        // You can add functionality if you wish, e.g., showing a shutdown animation.
-        document.querySelector('.turn-off-button').addEventListener('click', () => {
-            alert('Initiating shutdown sequence...'); // Placeholder
-            // In a real app, you might fade to black, or navigate away.
-        });
-
-    </script>
+    // Copy email to clipboard
+    const emailBtn = document.getElementById('email-btn');
+    emailBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText('23.kapoormanan@gmail.com').then(() => {
+        const originalText = emailBtn.textContent;
+        emailBtn.textContent = '[copied!]';
+        setTimeout(() => {
+          emailBtn.textContent = originalText;
+        }, 1500);
+      });
+    });
+  </script>
 </body>
 </html>
