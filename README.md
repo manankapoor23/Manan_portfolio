@@ -1,73 +1,66 @@
-# React + TypeScript + Vite
+# MANAN KAPOOR
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Computer Engineering undergraduate at Thapar Institute of Engineering and Technology, currently working as a Research Intern focused on Punjabi NLP, instruction tuning, and large language model fine-tuning.
 
-Currently, two official plugins are available:
+## Contact
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Phone: +91 99999 35670
+- Location: Chandigarh, India
+- Email: 23.kapoormanan@gmail.com
+- LinkedIn: https://linkedin.com/in/manan-kapoor
+- GitHub: https://github.com/manankapoor23
+- LeetCode: https://leetcode.com/u/manankapoor23
+- Portfolio: https://mkap.netlify.app
 
-## React Compiler
+## Education
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Thapar Institute of Engineering and Technology, Punjab, India  
+Bachelor of Engineering in Computer Engineering (COE)  
+2024 - 2028 | CGPA: 8.07 / 10.00
 
-## Expanding the ESLint configuration
+## Experience
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Research Intern (2025 - Present)
+Thapar Institute of Engineering and Technology, Patiala, India
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Designed and published PRISM-Punjabi on HuggingFace, the first multi-task Punjabi instruction dataset for controlled text rewriting.
+- Processed 16.43M tokens from 600+ curated web sources.
+- Built a Gemini 2.0 Flash teacher-model supervision pipeline generating 91,000+ instruction-conditioned samples across 6 rewriting tasks.
+- Applied structural validation that removed about 37% corrupt samples while maintaining 100% instruction compliance with BERTScore >= 0.929.
+- Fully fine-tuned LLaMA 3.1 8B on A100 GPUs with Unsloth and evaluated against 4 instruction baselines across 5 metrics on 6 tasks.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Projects
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 1. KV-Paged Inference System for Transformer Models
+GitHub: https://github.com/manankapoor23/KV-Paged-Attention  
+Tech: Python, PyTorch, Transformers, ML Systems, OS Concepts
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- Architected a paged KV cache system for transformer inference to improve long-context decoding memory efficiency by 40%+.
+- Designed allocator-backed KV pages with page tables, reference counting, prefix reuse, and copy-on-write semantics.
+- Reduced redundant allocations by 35% and validated numerical equivalence against naive attention with less than 0.1% precision delta.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 2. PRISM - Punjabi Rewriting Instructional Supervised Multi-task Model
+Dataset: https://huggingface.co/datasets/manankap23/PRISM-Punjabi  
+Tech: Python, PyTorch, Unsloth, HuggingFace, Gemini API, NLP, A100 GPU
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Curated 91,000+ instruction samples across 6 Punjabi transformation tasks on 16M+ tokens.
+- Published dataset on HuggingFace under CC-BY 4.0.
+- Benchmarked fine-tuned models against LLaMA-3.1-Instruct, Mistral-7B, Gemma-7B, and Phi-3-Mini across BLEU, chrF++, ROUGE-L, BERTScore-F1, and Word-F1.
+
+### 3. Natural Language to SQL Query System
+GitHub: https://github.com/manankapoor23/NL-SQL  
+Tech: Python, LangChain, LLMs, SQL, Slack API, Prompt Engineering
+
+- Built an LLM-powered Natural Language to SQL pipeline for executable database querying.
+- Developed a Slack-integrated assistant that generates schema-aware SQL and returns structured query results.
+
+## Technical Skills
+
+- Languages: Python, C++, JavaScript, R
+- ML and AI: Machine Learning, Deep Learning, Transformers, LLMs, RAG, Prompt Engineering, Fine-Tuning
+- Data and ML Engineering: Data Cleaning, Feature Engineering, Cross-Validation, Hyperparameter Tuning, Model Evaluation
+- Libraries and Frameworks: Pandas, NumPy, Scikit-learn, PyTorch, Matplotlib, Seaborn, Hugging Face Transformers, LangChain, OpenAI SDK, NLTK
+- Backend and Systems: JSON, Model Serving, Inference Pipelines
+- Databases: SQL, PostgreSQL, FAISS, Chroma
+- Tools: Git, GitHub, Docker, VS Code, Jupyter, RStudio
+- CS Fundamentals: Data Structures and Algorithms, OOP, Operating Systems, DBMS, Computer Networks, Probability and Statistics
