@@ -4,6 +4,51 @@ function App() {
   const heroText = '$ whoami'
   const [typedHero, setTypedHero] = useState('')
 
+  const projects = [
+    {
+      title: 'KV-Paged Inference System for Transformer Models',
+      tech: 'Python, PyTorch, Transformers, ML Systems, OS Concepts',
+      summary:
+        'Designed a paged KV cache with page tables, reference counting, prefix reuse, and copy-on-write to improve long-context inference memory efficiency.',
+      link: 'https://github.com/manankapoor23/KV-Paged-Attention',
+    },
+    {
+      title: 'PRISM - Punjabi Rewriting Instructional Supervised Multi-task Model',
+      tech: 'Python, PyTorch, Unsloth, HuggingFace, LLM Fine-Tuning, Gemini API',
+      summary:
+        'Built and published a 91,000+ sample Punjabi instruction dataset and fine-tuned LLaMA 3.1 8B on A100 GPUs with benchmark-driven evaluation.',
+      link: 'https://huggingface.co/datasets/manankap23/PRISM-Punjabi',
+    },
+    {
+      title: 'Natural Language to SQL Query System',
+      tech: 'Python, LangChain, LLMs, SQL, Slack API, Prompt Engineering',
+      summary:
+        'Implemented a Slack-integrated natural language to SQL pipeline that generates schema-aware queries and returns structured results.',
+      link: 'https://github.com/manankapoor23/NL-SQL',
+    },
+  ]
+
+  const skillGroups = [
+    {
+      title: 'Languages',
+      items: 'Python, C++, JavaScript, R',
+    },
+    {
+      title: 'ML and AI',
+      items:
+        'Transformers, LLMs, RAG, Prompt Engineering, Fine-Tuning, Deep Learning',
+    },
+    {
+      title: 'Libraries and Frameworks',
+      items:
+        'PyTorch, Hugging Face Transformers, LangChain, Pandas, NumPy, Scikit-learn',
+    },
+    {
+      title: 'Systems and Tools',
+      items: 'SQL, PostgreSQL, FAISS, Chroma, Docker, Git and GitHub, VS Code, Jupyter',
+    },
+  ]
+
   useEffect(() => {
     let index = 0
 
@@ -33,6 +78,9 @@ function App() {
             <a href="#about" className="hover:underline">
               About
             </a>
+            <a href="#education" className="hover:underline">
+              Education
+            </a>
             <a href="#experience" className="hover:underline">
               Experience
             </a>
@@ -54,11 +102,12 @@ function App() {
               className="text-4xl leading-[1.05] md:text-6xl"
               style={{ fontFamily: 'var(--font-serif)' }}
             >
-              Building clean systems and bold digital products.
+              Punjabi NLP and LLM systems research engineer.
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-relaxed md:text-lg">
-              I design and engineer product experiences with an editorial mindset:
-              sharp hierarchy, clear intent, and fast delivery from idea to deployment.
+              I am a Computer Engineering student at Thapar Institute of Engineering and
+              Technology and currently a Research Intern focused on instruction tuning,
+              controlled text generation, and Punjabi language model development.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
@@ -88,11 +137,36 @@ function App() {
               </p>
             </div>
             <ul className="mt-5 space-y-2 text-sm leading-relaxed md:text-base">
-              <li>Role: Product Engineer</li>
-              <li>Focus: Frontend architecture, DX, scalable UI systems</li>
-              <li>Stack: React, TypeScript, Tailwind, Node.js</li>
+              <li>Role: Research Intern (2025 - Present)</li>
+              <li>Institute: TIET, Patiala</li>
+              <li>Focus: Punjabi NLP, dataset engineering, LLM fine-tuning</li>
+              <li>Current CGPA: 8.07 / 10.00</li>
             </ul>
           </aside>
+        </section>
+
+        <section id="education" className="mt-4 border-2 border-[var(--color-fg-primary)]">
+          <div className="border-b-2 border-[var(--color-fg-primary)] px-5 py-3 md:px-8">
+            <h2 className="text-2xl md:text-3xl" style={{ fontFamily: 'var(--font-serif)' }}>
+              Education Bulletin
+            </h2>
+          </div>
+          <div className="grid gap-4 p-5 md:grid-cols-12 md:p-8">
+            <div className="border-2 border-[var(--color-fg-primary)] p-4 md:col-span-8">
+              <p className="text-xs uppercase tracking-[0.2em]">Institution</p>
+              <h3 className="mt-2 text-xl" style={{ fontFamily: 'var(--font-serif)' }}>
+                Thapar Institute of Engineering and Technology, Punjab
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed md:text-base">
+                Bachelor of Engineering in Computer Engineering (COE)
+              </p>
+            </div>
+            <div className="border-2 border-[var(--color-fg-primary)] p-4 md:col-span-4">
+              <p className="text-xs uppercase tracking-[0.2em]">Academic Snapshot</p>
+              <p className="mt-2 text-sm leading-relaxed md:text-base">Duration: 2024 - 2028</p>
+              <p className="text-sm leading-relaxed md:text-base">CGPA: 8.07 / 10.00</p>
+            </div>
+          </div>
         </section>
 
         <section id="experience" className="mt-4 border-2 border-[var(--color-fg-primary)]">
@@ -106,7 +180,7 @@ function App() {
               <thead>
                 <tr className="border-b-2 border-[var(--color-fg-primary)] bg-[var(--color-muted)]">
                   <th className="px-4 py-3 md:px-6">Period</th>
-                  <th className="px-4 py-3 md:px-6">Company</th>
+                  <th className="px-4 py-3 md:px-6">Organization</th>
                   <th className="px-4 py-3 md:px-6">Role</th>
                   <th className="px-4 py-3 md:px-6">Impact</th>
                 </tr>
@@ -114,15 +188,20 @@ function App() {
               <tbody>
                 <tr className="border-b border-[var(--color-fg-primary)]">
                   <td className="px-4 py-3 md:px-6">2025 - Present</td>
-                  <td className="px-4 py-3 md:px-6">Independent</td>
-                  <td className="px-4 py-3 md:px-6">Frontend Engineer</td>
-                  <td className="px-4 py-3 md:px-6">Shipped portfolio and client web platforms</td>
+                  <td className="px-4 py-3 md:px-6">TIET, Patiala</td>
+                  <td className="px-4 py-3 md:px-6">Research Intern</td>
+                  <td className="px-4 py-3 md:px-6">
+                    Built PRISM-Punjabi, generated 91,000+ supervised samples, and
+                    fine-tuned LLaMA 3.1 8B with strong BERTScore alignment.
+                  </td>
                 </tr>
                 <tr>
-                  <td className="px-4 py-3 md:px-6">2023 - 2025</td>
-                  <td className="px-4 py-3 md:px-6">Startup Projects</td>
-                  <td className="px-4 py-3 md:px-6">Full Stack Developer</td>
-                  <td className="px-4 py-3 md:px-6">Built internal tools and public interfaces</td>
+                  <td className="px-4 py-3 md:px-6">2024 - 2028</td>
+                  <td className="px-4 py-3 md:px-6">TIET, Punjab</td>
+                  <td className="px-4 py-3 md:px-6">B.E. Student (COE)</td>
+                  <td className="px-4 py-3 md:px-6">
+                    Strengthening computer science fundamentals and applied ML systems skills.
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -136,33 +215,26 @@ function App() {
             </h2>
           </div>
           <div className="grid gap-4 p-5 md:grid-cols-3 md:p-8">
-            <article className="hard-shadow-hover border-2 border-[var(--color-fg-primary)] p-4">
-              <p className="text-xs uppercase tracking-[0.2em]">React + TS</p>
-              <h3 className="mt-2 text-xl" style={{ fontFamily: 'var(--font-serif)' }}>
-                Editorial Portfolio
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed">
-                A bold newspaper-inspired portfolio with sharp geometry and strong visual hierarchy.
-              </p>
-            </article>
-            <article className="hard-shadow-hover border-2 border-[var(--color-fg-primary)] p-4">
-              <p className="text-xs uppercase tracking-[0.2em]">Node + API</p>
-              <h3 className="mt-2 text-xl" style={{ fontFamily: 'var(--font-serif)' }}>
-                Operations Dashboard
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed">
-                Internal dashboard for tracking deployment health, user activity, and team metrics.
-              </p>
-            </article>
-            <article className="hard-shadow-hover border-2 border-[var(--color-fg-primary)] p-4">
-              <p className="text-xs uppercase tracking-[0.2em]">Design System</p>
-              <h3 className="mt-2 text-xl" style={{ fontFamily: 'var(--font-serif)' }}>
-                Component Library
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed">
-                Reusable component framework with strict tokens, utilities, and accessibility defaults.
-              </p>
-            </article>
+            {projects.map((project) => (
+              <article
+                key={project.title}
+                className="hard-shadow-hover border-2 border-[var(--color-fg-primary)] p-4"
+              >
+                <p className="text-xs uppercase tracking-[0.2em]">{project.tech}</p>
+                <h3 className="mt-2 text-xl" style={{ fontFamily: 'var(--font-serif)' }}>
+                  {project.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed">{project.summary}</p>
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-3 inline-block text-xs uppercase tracking-[0.18em] underline"
+                >
+                  View Link
+                </a>
+              </article>
+            ))}
           </div>
         </section>
 
@@ -175,19 +247,21 @@ function App() {
               Skills Chronicle
             </h2>
           </div>
-          <div className="grid gap-4 p-5 md:grid-cols-3 md:p-8">
-            <div className="border-2 border-[var(--color-bg-primary)] p-4">
-              <p className="text-xs uppercase tracking-[0.2em]">Frontend</p>
-              <p className="mt-2 text-sm leading-relaxed">React, TypeScript, Tailwind CSS, Vite</p>
-            </div>
-            <div className="border-2 border-[var(--color-bg-primary)] p-4">
-              <p className="text-xs uppercase tracking-[0.2em]">Backend</p>
-              <p className="mt-2 text-sm leading-relaxed">Node.js, Express, REST APIs, PostgreSQL</p>
-            </div>
+          <div className="grid gap-4 p-5 md:grid-cols-2 md:p-8">
+            {skillGroups.map((group) => (
+              <div key={group.title} className="border-2 border-[var(--color-bg-primary)] p-4">
+                <p className="text-xs uppercase tracking-[0.2em]">{group.title}</p>
+                <p className="mt-2 text-sm leading-relaxed">{group.items}</p>
+              </div>
+            ))}
             <div className="border-2 border-[var(--color-bg-primary)] p-4" id="contact">
               <p className="text-xs uppercase tracking-[0.2em]">Contact</p>
-              <p className="mt-2 text-sm leading-relaxed">Email: manan@example.com</p>
+              <p className="mt-2 text-sm leading-relaxed">Email: 23.kapoormanan@gmail.com</p>
+              <p className="text-sm leading-relaxed">Phone: +91 99999 35670</p>
+              <p className="text-sm leading-relaxed">LinkedIn: linkedin.com/in/manan-kapoor</p>
               <p className="text-sm leading-relaxed">GitHub: github.com/manankapoor23</p>
+              <p className="text-sm leading-relaxed">LeetCode: leetcode.com/u/manankapoor23</p>
+              <p className="text-sm leading-relaxed">Portfolio: mkap.netlify.app</p>
             </div>
           </div>
         </section>
