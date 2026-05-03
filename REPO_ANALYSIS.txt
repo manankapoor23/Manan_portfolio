@@ -1,0 +1,160 @@
+================================================================================
+                        REPO ANALYSIS - MANAN KAPOOR PORTFOLIO
+================================================================================
+
+1. OVERALL TECH STACK
+================================================================================
+
+  Framework & Runtime:
+  - React 19.2.5 (UI Library)
+  - React DOM 19.2.5
+  - TypeScript ~6.0.2
+  - Vite 8.0.10 (Build Tool)
+
+  Styling & Design:
+  - TailwindCSS 4.2.4
+  - @tailwindcss/vite 4.2.4
+  - PostCSS 8.5.10
+  - Autoprefixer 10.5.0
+  - Custom CSS with CSS Variables
+
+  Utilities:
+  - lucide-react 1.11.0 (Icons)
+  - class-variance-authority 0.7.1 (Variance utilities)
+  - clsx 2.1.1 (ClassName utility)
+  - tailwind-merge 3.5.0 (Tailwind merge utility)
+
+  Linting & Dev:
+  - ESLint 10.2.1
+  - @vitejs/plugin-react 6.0.1
+  - eslint-plugin-react-hooks 7.1.1
+  - eslint-plugin-react-refresh 0.5.2
+
+  Deployment:
+  - Netlify (via netlify.toml)
+
+
+2. DESIGN LANGUAGE & AESTHETIC
+================================================================================
+
+  Overall Theme: "Newsprint / Retro Terminal" Hybrid
+
+  Color Palette (CSS Variables):
+  - Background Primary: #F9F9F7 (warm off-white, paper-like)
+  - Foreground Primary: #111111 (near-black)
+  - Muted: #E5E5E0 (light gray)
+  - Accent: #CC0000 (red accent)
+
+  Typography (CSS Variables):
+  - Serif (Headings): "Playfair Display", serif
+  - Body: "Lora", Georgia, serif
+  - Sans: "Inter", sans-serif
+  - Mono (Terminal/Code): "JetBrains Mono", monospace
+
+  Key Design Elements:
+  - 2px solid borders on all sections/elements
+  - Hard shadows on hover: 4px offset, solid black
+  - Newsprint texture: SVG dot pattern overlay (subtle)
+  - Terminal-style typing animation for hero text
+  - Grid-based layouts (12-column system in some areas)
+  - Uppercase, wide letter-spacing for labels (0.18em-0.2em)
+
+  Component Patterns:
+  - Sections wrapped in bordered containers
+  - Hard shadow hover effect with translate (-2px, -2px)
+  - Tables for data display
+  - Card-based project layouts
+
+
+3. FOLDER STRUCTURE
+================================================================================
+
+  /fake-repo/
+  ├── .git/                    # Git repository data
+  ├── .gitignore
+  ├── netlify.toml             # Netlify configuration
+  ├── package.json             # Dependencies & scripts
+  ├── package-lock.json
+  ├── tsconfig.json            # TypeScript root config
+  ├── tsconfig.app.json        # TypeScript app config
+  ├── tsconfig.node.json       # TypeScript node config
+  ├── index.html               # Entry HTML
+  ├── README.md
+  ├── manan.txt
+  │
+  ├── src/
+  │   ├── main.tsx             # React entry point
+  │   ├── App.tsx              # Main App component (single page)
+  │   ├── App.css              # (empty/minimal)
+  │   ├── index.css            # Global CSS + Tailwind directives
+  │   │
+  │   └── assets/
+  │       ├── vite.svg
+  │       ├── react.svg
+  │       └── hero.png
+  │
+  ├── public/
+  │   ├── favicon.svg
+  │   └── icons.svg
+  │
+  └── dist/                    # Built output
+      ├── index.html
+      ├── assets/
+      │   ├── index-Dq3iJ136.css
+      │   └── index-C36DmyxV.js
+      ├── favicon.svg
+      └── icons.svg
+
+
+4. CODE TECHNICALITIES
+================================================================================
+
+  Entry Point Flow:
+  1. index.html loads /src/main.tsx
+  2. main.tsx renders App component in StrictMode
+  3. App.tsx contains entire portfolio as single-page application
+
+  Key React Patterns:
+  - useState: For typing animation state (typedHero)
+  - useEffect: For typewriter effect on mount
+  - Component structure: Single App component with multiple sections
+  - No external component library (pure React + Tailwind)
+
+  Tailwind Configuration (v4):
+  - Uses @import "tailwindcss" (v4 syntax, not @tailwind directives)
+  - Custom @theme block for CSS variables
+  - @layer base for global styles
+  - @layer utilities for custom utility classes
+
+  Custom Utilities:
+  - .newsprint-texture: Adds paper-like crosshatch overlay
+  - .hard-shadow-hover: Box-shadow animation on hover
+
+  Responsive Design:
+  - Mobile-first with md: and lg: breakpoints
+  - max-w-6xl for main content width
+  - Grid layouts: 1 col mobile, 2-3 col on larger screens
+
+
+5. SCRIPTS (npm run ...)
+================================================================================
+
+  - dev        : vite           (Start dev server)
+  - build      : tsc -b && vite build
+  - lint       : eslint .
+  - preview    : vite preview   (Preview production build)
+
+
+6. NOTABLE CHARACTERISTICS
+================================================================================
+
+  - Single-file component (App.tsx ~270 lines)
+  - No routing (single page portfolio)
+  - No state management library (simple useState)
+  - No external UI component library
+  - Self-contained with all content hardcoded
+  - Terminal/CLI aesthetic with whoami style intro
+  - Sections: About, Education, Experience, Projects, Skills, Contact
+
+
+================================================================================
