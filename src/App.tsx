@@ -3,6 +3,14 @@ import { useEffect, useState } from 'react'
 function App() {
   const heroText = '$ whoami'
   const [typedHero, setTypedHero] = useState('')
+  const [isChatOpen, setIsChatOpen] = useState(false)
+  const [chatInput, setChatInput] = useState('')
+  const [messages, setMessages] = useState([
+    {
+      role: 'bot',
+      text: 'Hi! I am a rule-based profile bot. Ask about education, experience, projects, skills, or contact.',
+    },
+  ])
 
   const projects = [
     {
@@ -48,6 +56,83 @@ function App() {
       items: 'SQL, PostgreSQL, FAISS, Chroma, Docker, Git and GitHub, VS Code, Jupyter',
     },
   ]
+
+  const chatPrompts = [
+    { label: 'Education', query: 'Where did you study and what is your CGPA?' },
+    { label: 'Experience', query: 'What is your current role?' },
+    { label: 'Projects', query: 'What are your top projects?' },
+    { label: 'PRISM', query: 'Tell me about PRISM Punjabi.' },
+    { label: 'Skills', query: 'What are your core skills?' },
+    { label: 'Contact', query: 'How can I reach you?' },
+  ]
+
+  const getBotReply = (rawInput: string) => {
+    const input = rawInput.toLowerCase()
+
+    if (input.includes('name') || input.includes('who are you')) {
+      return 'He is Manan Kapoor, a Computer Engineering student and Research Intern focused on Punjabi NLP and LLMs.'
+    }
+
+    if (input.includes('education') || input.includes('college') || input.includes('study') || input.includes('institute')) {
+      return 'He studies Computer Engineering at Thapar Institute of Engineering and Technology (2024 - 2028), CGPA 8.07 / 10.00.'
+    }
+
+    if (input.includes('cgpa') || input.includes('gpa') || input.includes('grades')) {
+      return 'Current CGPA: 8.07 / 10.00.'
+    }
+
+    if (input.includes('experience') || input.includes('intern') || input.includes('role')) {
+      return 'Research Intern at TIET (2025 - Present), working on instruction tuning, Punjabi NLP datasets, and LLM fine-tuning.'
+    }
+
+    if (input.includes('skills') || input.includes('stack') || input.includes('tech')) {
+      return 'Core skills: Transformers, LLMs, RAG, fine-tuning, PyTorch, Hugging Face, LangChain, SQL, PostgreSQL, Docker, Git.'
+    }
+
+    if (input.includes('project') || input.includes('projects')) {
+      return 'Top projects: KV-Paged Inference System, PRISM Punjabi dataset + fine-tuning, and a Natural Language to SQL system.'
+    }
+
+    if (input.includes('prism') || input.includes('punjabi')) {
+      return 'PRISM is a 91,000+ sample Punjabi instruction dataset with LLaMA 3.1 8B fine-tuning and multi-metric evaluation.'
+    }
+
+    if (input.includes('kv') || input.includes('paged')) {
+      return 'KV-Paged Inference builds a paged KV cache with page tables and copy-on-write to improve long-context inference memory.'
+    }
+
+    if (input.includes('sql') || input.includes('nl') || input.includes('slack')) {
+      return 'Natural Language to SQL: a Slack-integrated pipeline that generates schema-aware SQL and returns structured results.'
+    }
+
+    if (input.includes('contact') || input.includes('email') || input.includes('linkedin') || input.includes('github')) {
+      return 'Email: 23.kapoormanan@gmail.com | LinkedIn: linkedin.com/in/manan-kapoor | GitHub: github.com/manankapoor23'
+    }
+
+    if (input.includes('location') || input.includes('based')) {
+      return 'Based in Chandigarh, India.'
+    }
+
+    if (input.includes('summary') || input.includes('about')) {
+      return 'Computer Engineering student and Research Intern focused on Punjabi NLP, dataset engineering, and LLM fine-tuning.'
+    }
+
+    return 'I can answer about education, experience, projects, skills, and contact. Try a quick prompt below.'
+  }
+
+  const handleSendMessage = (message: string) => {
+    const trimmed = message.trim()
+    if (!trimmed) return
+
+    const reply = getBotReply(trimmed)
+    setMessages((prev) => [
+      ...prev,
+      { role: 'user', text: trimmed },
+      { role: 'bot', text: reply },
+    ])
+    setChatInput('')
+    setIsChatOpen(true)
+  }
 
   useEffect(() => {
     let index = 0
@@ -146,6 +231,75 @@ function App() {
               <li><span style={{ color: 'var(--color-accent)' }}>:</span> Focus: Punjabi NLP, dataset engineering, LLM fine-tuning</li>
               <li><span style={{ color: 'var(--color-accent)' }}>:</span> Current CGPA: 8.07 / 10.00</li>
             </ul>
+            <div className="mt-6">
+              <button
+                type="button"
+                className="led-btn-accent text-xs uppercase tracking-widest"
+                onClick={() => setIsChatOpen((prev) => !prev)}
+              >
+                ASK_ABOUT_ME
+              </button>
+              <p className="mt-2 text-xs uppercase tracking-widest dot-matrix-dim">
+                RULE_BASED_CHATBOT
+              </p>
+              {isChatOpen ? (
+                <div className="mt-3 section p-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="text-xs uppercase tracking-widest dot-matrix-accent">
+                      PROFILE_BOT
+                    </p>
+                    <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest text-[var(--color-fg-secondary)]">
+                      <span className="chat-led"></span>
+                      rules-only
+                    </span>
+                  </div>
+                  <div className="mt-3 max-h-48 space-y-3 overflow-y-auto text-sm">
+                    {messages.map((message, index) => (
+                      <div
+                        key={`${message.role}-${index}`}
+                        className={`chat-bubble ${message.role === 'user' ? 'chat-user' : 'chat-bot'}`}
+                      >
+                        {message.text}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {chatPrompts.map((prompt) => (
+                      <button
+                        key={prompt.label}
+                        type="button"
+                        className="chat-chip"
+                        onClick={() => handleSendMessage(prompt.query)}
+                      >
+                        {prompt.label}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="mt-3 flex gap-2">
+                    <input
+                      type="text"
+                      value={chatInput}
+                      onChange={(event) => setChatInput(event.target.value)}
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter') {
+                          event.preventDefault()
+                          handleSendMessage(chatInput)
+                        }
+                      }}
+                      placeholder="Ask about education, projects, skills..."
+                      className="chat-input flex-1 text-sm"
+                    />
+                    <button
+                      type="button"
+                      className="led-btn text-xs uppercase tracking-widest"
+                      onClick={() => handleSendMessage(chatInput)}
+                    >
+                      ASK
+                    </button>
+                  </div>
+                </div>
+              ) : null}
+            </div>
           </aside>
         </section>
 
