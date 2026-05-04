@@ -1,15 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import "@fontsource/inter";
 @import "tailwindcss";
 
 @theme {
   --color-bg-primary: #000000;
-  --color-fg-primary: #B0B0B0;
-  --color-fg-secondary: #606060;
-  --color-muted: #1a1a1a;
-  --color-border: #222222;
-  --color-accent: #4A7C4A;
+  --color-fg-primary: #ffffff;
+  --color-fg-secondary: #888888;
+  --color-muted: transparent;
+  --color-border: #333333;
+  --color-accent: #ffffff;
   
-  --font-mono: "VT323", "Courier New", monospace;
+  --font-main: "Inter", sans-serif;
   
   --radius-none: 0px;
 }
@@ -21,77 +21,83 @@
   body {
     background-color: var(--color-bg-primary);
     background-image: 
-      radial-gradient(circle at center, #1a1a1a 1px, transparent 1px);
+      radial-gradient(#111 1px, transparent 1px);
     background-size: 6px 6px;
     color: var(--color-fg-primary);
-    font-family: var(--font-mono);
-    -webkit-font-smoothing: none;
-    -moz-osx-font-smoothing: unset;
+    font-family: var(--font-main);
+    -webkit-font-smoothing: antialiased;
     font-size: 18px;
     line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-mono);
-    color: var(--color-fg-primary);
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-weight: 500;
+    margin: 0;
   }
   a {
-    color: var(--color-accent);
+    color: var(--color-fg-primary);
     text-decoration: none;
-    border-bottom: 1px solid var(--color-accent);
+    transition: opacity 0.2s;
   }
   a:hover {
-    background-color: var(--color-accent);
-    color: var(--color-bg-primary);
+    opacity: 0.7;
+    background: transparent;
+    color: var(--color-fg-primary);
   }
 }
 
 @layer utilities {
   .dot-matrix-text {
-    color: transparent;
+    color: transparent !important;
     background-image: 
-      radial-gradient(#B0B0B0 1px, transparent 1px);
+      radial-gradient(var(--color-fg-primary) 1.5px, transparent 1.5px);
     background-size: 4px 4px;
+    background-position: 0 0;
     -webkit-background-clip: text;
     background-clip: text;
+    font-weight: 700;
   }
   .dot-matrix-accent {
-    color: transparent;
+    color: transparent !important;
     background-image: 
-      radial-gradient(#4A7C4A 1px, transparent 1px);
+      radial-gradient(#ffffff 1.5px, transparent 1.5px);
     background-size: 4px 4px;
+    background-position: 0 0;
     -webkit-background-clip: text;
     background-clip: text;
+    font-weight: 700;
   }
   .dot-matrix-dim {
-    color: transparent;
+    color: transparent !important;
     background-image: 
-      radial-gradient(#606060 1px, transparent 1px);
+      radial-gradient(var(--color-fg-secondary) 1px, transparent 1px);
     background-size: 4px 4px;
+    background-position: 0 0;
     -webkit-background-clip: text;
     background-clip: text;
+    font-weight: 700;
   }
   .section {
-    border: 1px solid var(--color-border);
+    border: none;
   }
   .divider {
     height: 1px;
     background: var(--color-border);
   }
-  .led-btn {
-    border: 1px solid var(--color-border);
-    padding: 6px 12px;
-    display: inline-block;
-    font-size: 14px;
+  .divider-top {
+    border-top: 1px solid var(--color-border);
   }
-  .led-btn-accent {
-    border: 1px solid var(--color-accent);
-    background: rgba(74, 124, 74, 0.1);
-    padding: 6px 12px;
-    display: inline-block;
-    font-size: 14px;
+  .led-btn, .led-btn-accent {
+    border: none;
+    padding: 0;
+    background: transparent;
+    font-size: 16px;
+    opacity: 0.6;
+  }
+  .led-btn:hover, .led-btn-accent:hover {
+    opacity: 1;
+    background: transparent;
   }
   .cursor::after {
     content: "_";
@@ -113,9 +119,10 @@
   }
 
   .chat-bubble {
-    border: 1px solid var(--color-border);
-    padding: 8px 10px;
-    background: #0f0f0f;
+    padding: 8px 0;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .chat-bot {
@@ -124,8 +131,6 @@
 
   .chat-user {
     color: var(--color-fg-primary);
-    border-color: var(--color-accent);
-    background: rgba(74, 124, 74, 0.1);
   }
 
   .chat-chip {
@@ -134,32 +139,30 @@
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.12em;
+    background: transparent;
+    color: var(--color-fg-secondary);
   }
 
   .chat-chip:hover {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
+    border-color: var(--color-fg-primary);
+    color: var(--color-fg-primary);
   }
 
   .chat-input {
-    border: 1px solid var(--color-border);
-    background: #0b0b0b;
-    padding: 6px 8px;
+    border: none;
+    border-bottom: 1px solid var(--color-border);
+    background: transparent;
+    padding: 6px 0;
     color: var(--color-fg-primary);
   }
 
   .chat-input:focus {
-    outline: 1px solid var(--color-accent);
-    outline-offset: 1px;
+    outline: none;
+    border-bottom-color: var(--color-fg-primary);
   }
 
   .chat-led {
-    width: 6px;
-    height: 6px;
-    border-radius: 999px;
-    background: var(--color-accent);
-    box-shadow: 0 0 6px rgba(74, 124, 74, 0.8);
-    animation: chat-pulse 1.6s ease-in-out infinite;
+    display: none;
   }
 
   @keyframes chat-pulse {
